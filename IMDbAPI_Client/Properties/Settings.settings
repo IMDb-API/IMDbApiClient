@@ -1,0 +1,37 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="IMDbAPI_Client.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MoviesDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\New Movies</Value>
+    </Setting>
+    <Setting Name="ApiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RemoveSites" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DownloadSiteName1
+DownloadSiteName2</Value>
+    </Setting>
+    <Setting Name="Theme" Type="MetroFramework.MetroThemeStyle" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="Style" Type="MetroFramework.MetroColorStyle" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
+    <Setting Name="SeriesTvDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SeriesTvID" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MovieFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClientOptions" Type="IMDbAPI_Client.ClientOptions" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OperationType" Type="IMDbAPI_Client.OperationType" Scope="User">
+      <Value Profile="(Default)">Movies</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
