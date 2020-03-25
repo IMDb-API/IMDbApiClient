@@ -129,7 +129,7 @@ namespace IMDbAPI_Client.UserControls
                     // SUBTITLE
                     if (_clientOptions.Subtitles)
                     {
-                        string seasonNumber = null;
+                        int? seasonNumber = null;
                         if (Properties.Settings.Default.OperationType == OperationType.TVSeries
                             && data.TvSeriesInfo != null
                             && data.TvSeriesInfo.Seasons != null

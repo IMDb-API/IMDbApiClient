@@ -17,14 +17,14 @@ namespace IMDbAPI_Client
             ddlSeasons.DataSource = seasons;
         }
 
-        public string SeasonNumber
+        public int? SeasonNumber
         {
             get
             {
                 if (string.IsNullOrEmpty(ddlSeasons.Text) || ddlSeasons.Text == "All")
                     return null;
 
-                return ddlSeasons.Text;
+                return Convert.ToInt32(ddlSeasons.Text);
             }
         }
 
