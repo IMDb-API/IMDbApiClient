@@ -129,7 +129,7 @@ namespace IMDbAPI_Client
                 return;
             }
 
-            System.Diagnostics.Process.Start("https://imdb-api.com/Title/" + Id);
+            System.Diagnostics.Process.Start("https://imdb-api.com/title/" + Id);
         }
 
         private void txtExpression_Enter(object sender, EventArgs e)

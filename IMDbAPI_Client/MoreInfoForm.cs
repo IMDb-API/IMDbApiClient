@@ -99,7 +99,7 @@ namespace IMDbAPI_Client
 
         private void btnIMDb_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://imdb-api.com/Title/" + _id);
+            System.Diagnostics.Process.Start("https://imdb-api.com/title/" + _id);
         }
     }
 }

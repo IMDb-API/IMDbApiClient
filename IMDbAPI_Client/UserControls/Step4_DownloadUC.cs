@@ -296,7 +296,7 @@ namespace IMDbAPI_Client.UserControls
                             string filePath = Path.Combine(dir, $"{item.Id} on IMDb-API.url");
                             string content = $"[InternetShortcut]";
                             content += Environment.NewLine;
-                            content += $"URL=https://imdb-api.com/Title/{item.Id}";
+                            content += $"URL=https://imdb-api.com/title/{item.Id}";
                             File.WriteAllText(filePath, content);
                         }
 
@@ -348,6 +348,19 @@ namespace IMDbAPI_Client.UserControls
                                     Utils.CreateUrlShortcut(dir, $"{item.Id} on Wikipedia [{_clientOptions.PlotLanguage.ToString().ToLower()}].url", plotLangWiki?.Url);
                                 }
                             }
+                        }
+
+                        // ACTORS
+                        string actorDir = Path.Combine(dir, "Actors");
+                        if (!Directory.Exists(actorDir))
+                            Directory.CreateDirectory(actorDir);
+                        foreach(var actor in data.ActorList)
+                        {
+                            string filePath = Path.Combine(actorDir, $"{Utils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
+                            string content = $"[InternetShortcut]";
+                            content += Environment.NewLine;
+                            content += $"URL=https://imdb-api.com/name/{actor.Id}";
+                            File.WriteAllText(filePath, content);
                         }
                     }
 
