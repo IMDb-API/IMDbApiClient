@@ -4,6 +4,7 @@ using MetroFramework.Controls;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace IMDbAPI_Client
@@ -13,8 +14,15 @@ namespace IMDbAPI_Client
         public MainForm()
         {
             InitializeComponent();
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            var fileVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+            var version = new Version(fileVersionInfo.ProductVersion);
+            _version = btnVersion.Text = $"v{version.ToString(2)}";
         }
 
+
+        private string _version;
         private List<GridData> _gridDataItems;
 
         private UserControl _currentUC;
@@ -240,6 +248,27 @@ namespace IMDbAPI_Client
         private void btnPing_Click(object sender, EventArgs e)
         {
             new PingForm().ShowDialog();
+        }
+
+        private void btnVersion_Click(object sender, EventArgs e)
+        {
+            string url = "https://imdb-api.com/client";
+            var ps = new ProcessStartInfo(url)
+            {
+                UseShellExecute = true,
+                Verb = "open"
+            };
+            Process.Start(ps);
+        }
+
+        private void btnVersion_MouseEnter(object sender, EventArgs e)
+        {
+            btnVersion.Text = "CHECK FOR UPDATE";
+        }
+
+        private void btnVersion_MouseLeave(object sender, EventArgs e)
+        {
+            btnVersion.Text = _version;
         }
     }
 }

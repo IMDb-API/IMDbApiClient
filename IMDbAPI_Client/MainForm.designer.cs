@@ -41,6 +41,7 @@
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.spinnerWaiting = new MetroFramework.Controls.MetroProgressSpinner();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.btnVersion = new MetroFramework.Controls.MetroButton();
             this.toolbarUserControl1 = new IMDbAPI_Client.UserControls.ToolbarUserControl();
             this.pnlCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
@@ -48,6 +49,7 @@
             // 
             // pnlCommands
             // 
+            this.pnlCommands.Controls.Add(this.btnVersion);
             this.pnlCommands.Controls.Add(this.btnPing);
             this.pnlCommands.Controls.Add(this.btnSettings);
             this.pnlCommands.Controls.Add(this.btnPrevious);
@@ -174,6 +176,18 @@
             this.metroLabel1.TabIndex = 3;
             this.metroLabel1.Text = "A free client app for IMDb-API.com";
             // 
+            // btnVersion
+            // 
+            this.btnVersion.Location = new System.Drawing.Point(266, 12);
+            this.btnVersion.Name = "btnVersion";
+            this.btnVersion.Size = new System.Drawing.Size(119, 49);
+            this.btnVersion.TabIndex = 3;
+            this.btnVersion.Text = "v0.0";
+            this.btnVersion.UseSelectable = true;
+            this.btnVersion.Click += new System.EventHandler(this.btnVersion_Click);
+            this.btnVersion.MouseEnter += new System.EventHandler(this.btnVersion_MouseEnter);
+            this.btnVersion.MouseLeave += new System.EventHandler(this.btnVersion_MouseLeave);
+            // 
             // toolbarUserControl1
             // 
             this.toolbarUserControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -226,5 +240,6 @@
         private MetroFramework.Controls.MetroProgressSpinner spinnerWaiting;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroButton btnPing;
+        private MetroFramework.Controls.MetroButton btnVersion;
     }
 }
