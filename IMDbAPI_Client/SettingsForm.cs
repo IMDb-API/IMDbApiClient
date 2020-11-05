@@ -13,6 +13,11 @@ namespace IMDbAPI_Client
         {
             InitializeComponent();
             txtRemoveSiteName.Text = Properties.Settings.Default.RemoveSites;
+            chkUseProxy.Checked = Properties.Settings.Default.UseProxy;
+            txtProxyServer.Text = Properties.Settings.Default.ProxyServer;
+            txtProxyUsername.Text = Properties.Settings.Default.ProxyUsername;
+            txtProxyPassword.Text = Properties.Settings.Default.ProxyPassword;
+            chkUseProxy_CheckedChanged(null, null);
 
             ddlTheme.DataSource = Enum.GetValues(typeof(MetroThemeStyle));
             ddlTheme.SelectedItem = Properties.Settings.Default.Theme;
@@ -41,6 +46,9 @@ namespace IMDbAPI_Client
             _settingsUC.SaveSettings();
 
             Properties.Settings.Default.RemoveSites = txtRemoveSiteName.Text;
+            Properties.Settings.Default.ProxyServer = txtProxyServer.Text;
+            Properties.Settings.Default.ProxyUsername = txtProxyUsername.Text;
+            Properties.Settings.Default.ProxyPassword = txtProxyPassword.Text;
 
             Properties.Settings.Default.Theme = (MetroThemeStyle)Enum.Parse(typeof(MetroThemeStyle), ddlTheme.Text);
             Properties.Settings.Default.Style = (MetroColorStyle)Enum.Parse(typeof(MetroColorStyle), ddlStyle.Text);
@@ -69,6 +77,16 @@ namespace IMDbAPI_Client
                 colorName = "SkyBlue";
             lblStyleTitle.ForeColor = Color.FromName(colorName);
             lblStyleContent.ForeColor = Color.FromName(colorName);
+        }
+
+        private void chkUseProxy_CheckedChanged(object sender, EventArgs e)
+        {
+            lblProxyServer.Enabled =
+                txtProxyServer.Enabled =
+                lblProxyUsername.Enabled =
+                txtProxyUsername.Enabled =
+                lblProxyPassword.Enabled =
+                txtProxyPassword.Enabled = chkUseProxy.Checked;
         }
     }
 }

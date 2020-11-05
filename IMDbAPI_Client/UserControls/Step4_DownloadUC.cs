@@ -24,7 +24,7 @@ namespace IMDbAPI_Client.UserControls
             _gridDataItems = gridDataItems;
 
             string apiKey = Properties.Settings.Default.ApiKey;
-            _apiLib = new ApiLib(apiKey);
+            _apiLib = new ApiLib(apiKey, Program.GetWebProxy());
 
             _clientOptions = Properties.Settings.Default.ClientOptions;
         }
@@ -177,7 +177,7 @@ namespace IMDbAPI_Client.UserControls
                         if (_clientOptions.Posters_EnglishOnly) // Posters_EnglishOnly
                             data.Posters.Posters = data.Posters.Posters.Where(px => px.Language == "en").ToList();
 
-                        int total = data.Posters.Posters.Count + data.Posters.Backdors.Count;
+                        int total = data.Posters.Posters.Count + data.Posters.Backdrops.Count;
                         int current = 1;
 
                         string dir = Path.Combine(movieRootDir, "Posters");
@@ -190,22 +190,22 @@ namespace IMDbAPI_Client.UserControls
                         if (!await Utils.PingAsync("themoviedb.org"))
                         {
                             data.Posters.Posters.ForEach(p => p.Link = p.Link.Replace("/posters/", "/posters-stream/").Replace("/posters/", "/posters-stream/"));
-                            data.Posters.Backdors.ForEach(p => p.Link = p.Link.Replace("/posters/", "/posters-stream/").Replace("/posters/", "/posters-stream/"));
+                            data.Posters.Backdrops.ForEach(p => p.Link = p.Link.Replace("/posters/", "/posters-stream/").Replace("/posters/", "/posters-stream/"));
                         }
 
                         foreach (var p in data.Posters.Posters)
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link);
+                            await Utils.DownloadFileAsync(filePath, p.Link, Program.GetWebProxy());
                             current++;
                             index++;
                         }
-                        foreach (var p in data.Posters.Backdors)
+                        foreach (var p in data.Posters.Backdrops)
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link);
+                            await Utils.DownloadFileAsync(filePath, p.Link, Program.GetWebProxy());
                             current++;
                             index++;
                         }
@@ -240,7 +240,7 @@ namespace IMDbAPI_Client.UserControls
                             ReportCurrent("Images", currentIndex, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{Utils.RenameToPhisicalName(img.Title)}.jpg");
                             string url = img.Image;
-                            await Utils.DownloadImageAsync(filePath, url);
+                            await Utils.DownloadImageAsync(filePath, url, Program.GetWebProxy());
                             currentIndex++;
                         }
 
@@ -264,7 +264,8 @@ namespace IMDbAPI_Client.UserControls
                                 var trailerBytes = await Utils.DownloadDataAsync(
                                     video.Url,
                                     new ProgressData(progress => ReportCurrent($"Trailer", progress.Current, progress.Total, cancellationToken.IsCancellationRequested, true)),
-                                    cancellationToken);
+                                    cancellationToken,
+                                    Program.GetWebProxy());
 
                                 if (trailerBytes != null)
                                 {
@@ -354,7 +355,7 @@ namespace IMDbAPI_Client.UserControls
                         string actorDir = Path.Combine(dir, "Actors");
                         if (!Directory.Exists(actorDir))
                             Directory.CreateDirectory(actorDir);
-                        foreach(var actor in data.ActorList)
+                        foreach (var actor in data.ActorList)
                         {
                             string filePath = Path.Combine(actorDir, $"{Utils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
                             string content = $"[InternetShortcut]";

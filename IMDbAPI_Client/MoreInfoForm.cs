@@ -20,7 +20,7 @@ namespace IMDbAPI_Client
             _id = id;
 
             string apiKey = Properties.Settings.Default.ApiKey;
-            _apiLib = new ApiLib(apiKey);
+            _apiLib = new ApiLib(apiKey, Program.GetWebProxy());
         }
 
         private readonly ApiLib _apiLib;

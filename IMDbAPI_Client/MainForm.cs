@@ -16,7 +16,7 @@ namespace IMDbAPI_Client
             InitializeComponent();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            var fileVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             var version = new Version(fileVersionInfo.ProductVersion);
             _version = btnVersion.Text = $"v{version.ToString(2)}";
         }

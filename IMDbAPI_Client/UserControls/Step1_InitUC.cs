@@ -23,7 +23,7 @@ namespace IMDbAPI_Client.UserControls
             txtApiKey.UseSystemPasswordChar = true;
 
             string apiKey = Properties.Settings.Default.ApiKey;
-            _apiLib = new ApiLib(apiKey);
+            _apiLib = new ApiLib(apiKey, Program.GetWebProxy());
         }
 
         private readonly ApiLib _apiLib;

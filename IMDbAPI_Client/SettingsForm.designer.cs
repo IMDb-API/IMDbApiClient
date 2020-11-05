@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.tabOptions = new MetroFramework.Controls.MetroTabPage();
             this.tabRemoveSiteName = new MetroFramework.Controls.MetroTabPage();
             this.txtRemoveSiteName = new MetroFramework.Controls.MetroTextBox();
-            this.tabOptions = new MetroFramework.Controls.MetroTabPage();
             this.tabOthers = new MetroFramework.Controls.MetroTabPage();
             this.pnlStyleViewer = new System.Windows.Forms.Panel();
             this.lblStyleContent = new System.Windows.Forms.Label();
@@ -42,14 +42,23 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.ddlTheme = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.tabProxy = new MetroFramework.Controls.MetroTabPage();
+            this.lblProxyPassword = new MetroFramework.Controls.MetroLabel();
+            this.lblProxyUsername = new MetroFramework.Controls.MetroLabel();
+            this.lblProxyServer = new MetroFramework.Controls.MetroLabel();
+            this.txtProxyPassword = new MetroFramework.Controls.MetroTextBox();
+            this.chkUseProxy = new MetroFramework.Controls.MetroCheckBox();
+            this.txtProxyUsername = new MetroFramework.Controls.MetroTextBox();
+            this.txtProxyServer = new MetroFramework.Controls.MetroTextBox();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
-            this.toolbarUserControl1 = new IMDbAPI_Client.UserControls.ToolbarUserControl();
             this.btnOK = new MetroFramework.Controls.MetroButton();
             this.btnCancel = new MetroFramework.Controls.MetroButton();
+            this.toolbarUserControl1 = new IMDbAPI_Client.UserControls.ToolbarUserControl();
             this.metroTabControl1.SuspendLayout();
             this.tabRemoveSiteName.SuspendLayout();
             this.tabOthers.SuspendLayout();
             this.pnlStyleViewer.SuspendLayout();
+            this.tabProxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +69,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.metroTabControl1.Controls.Add(this.tabOptions);
             this.metroTabControl1.Controls.Add(this.tabRemoveSiteName);
+            this.metroTabControl1.Controls.Add(this.tabProxy);
             this.metroTabControl1.Controls.Add(this.tabOthers);
             this.metroTabControl1.FontSize = MetroFramework.MetroTabControlSize.Tall;
             this.metroTabControl1.FontWeight = MetroFramework.MetroTabControlWeight.Regular;
@@ -71,6 +81,21 @@
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             this.metroTabControl1.UseStyleColors = true;
+            // 
+            // tabOptions
+            // 
+            this.tabOptions.HorizontalScrollbarBarColor = true;
+            this.tabOptions.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabOptions.HorizontalScrollbarSize = 2;
+            this.tabOptions.Location = new System.Drawing.Point(4, 44);
+            this.tabOptions.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabOptions.Name = "tabOptions";
+            this.tabOptions.Size = new System.Drawing.Size(870, 465);
+            this.tabOptions.TabIndex = 0;
+            this.tabOptions.Text = "Options";
+            this.tabOptions.VerticalScrollbarBarColor = true;
+            this.tabOptions.VerticalScrollbarHighlightOnWheel = false;
+            this.tabOptions.VerticalScrollbarSize = 3;
             // 
             // tabRemoveSiteName
             // 
@@ -122,21 +147,6 @@
             this.txtRemoveSiteName.UseSelectable = true;
             this.txtRemoveSiteName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtRemoveSiteName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // tabOptions
-            // 
-            this.tabOptions.HorizontalScrollbarBarColor = true;
-            this.tabOptions.HorizontalScrollbarHighlightOnWheel = false;
-            this.tabOptions.HorizontalScrollbarSize = 2;
-            this.tabOptions.Location = new System.Drawing.Point(4, 44);
-            this.tabOptions.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabOptions.Name = "tabOptions";
-            this.tabOptions.Size = new System.Drawing.Size(870, 465);
-            this.tabOptions.TabIndex = 0;
-            this.tabOptions.Text = "Options";
-            this.tabOptions.VerticalScrollbarBarColor = true;
-            this.tabOptions.VerticalScrollbarHighlightOnWheel = false;
-            this.tabOptions.VerticalScrollbarSize = 3;
             // 
             // tabOthers
             // 
@@ -232,21 +242,177 @@
             this.metroLabel1.Text = "Theme";
             this.metroLabel1.UseStyleColors = true;
             // 
+            // tabProxy
+            // 
+            this.tabProxy.Controls.Add(this.lblProxyPassword);
+            this.tabProxy.Controls.Add(this.lblProxyUsername);
+            this.tabProxy.Controls.Add(this.lblProxyServer);
+            this.tabProxy.Controls.Add(this.txtProxyPassword);
+            this.tabProxy.Controls.Add(this.chkUseProxy);
+            this.tabProxy.Controls.Add(this.txtProxyUsername);
+            this.tabProxy.Controls.Add(this.txtProxyServer);
+            this.tabProxy.HorizontalScrollbarBarColor = true;
+            this.tabProxy.HorizontalScrollbarHighlightOnWheel = false;
+            this.tabProxy.HorizontalScrollbarSize = 8;
+            this.tabProxy.Location = new System.Drawing.Point(4, 44);
+            this.tabProxy.Name = "tabProxy";
+            this.tabProxy.Size = new System.Drawing.Size(870, 465);
+            this.tabProxy.TabIndex = 3;
+            this.tabProxy.Text = "Proxy";
+            this.tabProxy.VerticalScrollbarBarColor = true;
+            this.tabProxy.VerticalScrollbarHighlightOnWheel = false;
+            this.tabProxy.VerticalScrollbarSize = 9;
+            // 
+            // lblProxyPassword
+            // 
+            this.lblProxyPassword.AutoSize = true;
+            this.lblProxyPassword.Location = new System.Drawing.Point(70, 215);
+            this.lblProxyPassword.Name = "lblProxyPassword";
+            this.lblProxyPassword.Size = new System.Drawing.Size(63, 19);
+            this.lblProxyPassword.TabIndex = 8;
+            this.lblProxyPassword.Text = "Password";
+            // 
+            // lblProxyUsername
+            // 
+            this.lblProxyUsername.AutoSize = true;
+            this.lblProxyUsername.Location = new System.Drawing.Point(70, 152);
+            this.lblProxyUsername.Name = "lblProxyUsername";
+            this.lblProxyUsername.Size = new System.Drawing.Size(68, 19);
+            this.lblProxyUsername.TabIndex = 8;
+            this.lblProxyUsername.Text = "Username";
+            // 
+            // lblProxyServer
+            // 
+            this.lblProxyServer.AutoSize = true;
+            this.lblProxyServer.Location = new System.Drawing.Point(70, 89);
+            this.lblProxyServer.Name = "lblProxyServer";
+            this.lblProxyServer.Size = new System.Drawing.Size(47, 19);
+            this.lblProxyServer.TabIndex = 8;
+            this.lblProxyServer.Text = "Server";
+            // 
+            // txtProxyPassword
+            // 
+            this.txtProxyPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtProxyPassword.CustomButton.Image = null;
+            this.txtProxyPassword.CustomButton.Location = new System.Drawing.Point(388, 2);
+            this.txtProxyPassword.CustomButton.Name = "";
+            this.txtProxyPassword.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtProxyPassword.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyPassword.CustomButton.TabIndex = 1;
+            this.txtProxyPassword.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyPassword.CustomButton.UseSelectable = true;
+            this.txtProxyPassword.CustomButton.Visible = false;
+            this.txtProxyPassword.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtProxyPassword.Lines = new string[0];
+            this.txtProxyPassword.Location = new System.Drawing.Point(70, 238);
+            this.txtProxyPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProxyPassword.MaxLength = 32767;
+            this.txtProxyPassword.Name = "txtProxyPassword";
+            this.txtProxyPassword.PasswordChar = '●';
+            this.txtProxyPassword.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyPassword.SelectedText = "";
+            this.txtProxyPassword.SelectionLength = 0;
+            this.txtProxyPassword.SelectionStart = 0;
+            this.txtProxyPassword.ShortcutsEnabled = true;
+            this.txtProxyPassword.ShowClearButton = true;
+            this.txtProxyPassword.Size = new System.Drawing.Size(416, 30);
+            this.txtProxyPassword.TabIndex = 5;
+            this.txtProxyPassword.UseSelectable = true;
+            this.txtProxyPassword.UseSystemPasswordChar = true;
+            this.txtProxyPassword.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyPassword.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // chkUseProxy
+            // 
+            this.chkUseProxy.AutoSize = true;
+            this.chkUseProxy.FontSize = MetroFramework.MetroCheckBoxSize.Medium;
+            this.chkUseProxy.FontWeight = MetroFramework.MetroCheckBoxWeight.Bold;
+            this.chkUseProxy.Location = new System.Drawing.Point(70, 45);
+            this.chkUseProxy.Name = "chkUseProxy";
+            this.chkUseProxy.Size = new System.Drawing.Size(128, 19);
+            this.chkUseProxy.TabIndex = 7;
+            this.chkUseProxy.Text = "Use Web Proxy";
+            this.chkUseProxy.UseSelectable = true;
+            this.chkUseProxy.UseStyleColors = true;
+            this.chkUseProxy.CheckedChanged += new System.EventHandler(this.chkUseProxy_CheckedChanged);
+            // 
+            // txtProxyUsername
+            // 
+            this.txtProxyUsername.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtProxyUsername.CustomButton.Image = null;
+            this.txtProxyUsername.CustomButton.Location = new System.Drawing.Point(388, 2);
+            this.txtProxyUsername.CustomButton.Name = "";
+            this.txtProxyUsername.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtProxyUsername.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyUsername.CustomButton.TabIndex = 1;
+            this.txtProxyUsername.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyUsername.CustomButton.UseSelectable = true;
+            this.txtProxyUsername.CustomButton.Visible = false;
+            this.txtProxyUsername.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtProxyUsername.Lines = new string[0];
+            this.txtProxyUsername.Location = new System.Drawing.Point(70, 175);
+            this.txtProxyUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProxyUsername.MaxLength = 32767;
+            this.txtProxyUsername.Name = "txtProxyUsername";
+            this.txtProxyUsername.PasswordChar = '\0';
+            this.txtProxyUsername.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyUsername.SelectedText = "";
+            this.txtProxyUsername.SelectionLength = 0;
+            this.txtProxyUsername.SelectionStart = 0;
+            this.txtProxyUsername.ShortcutsEnabled = true;
+            this.txtProxyUsername.ShowClearButton = true;
+            this.txtProxyUsername.Size = new System.Drawing.Size(416, 30);
+            this.txtProxyUsername.TabIndex = 5;
+            this.txtProxyUsername.UseSelectable = true;
+            this.txtProxyUsername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyUsername.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // txtProxyServer
+            // 
+            this.txtProxyServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            // 
+            // 
+            this.txtProxyServer.CustomButton.Image = null;
+            this.txtProxyServer.CustomButton.Location = new System.Drawing.Point(388, 2);
+            this.txtProxyServer.CustomButton.Name = "";
+            this.txtProxyServer.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtProxyServer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyServer.CustomButton.TabIndex = 1;
+            this.txtProxyServer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyServer.CustomButton.UseSelectable = true;
+            this.txtProxyServer.CustomButton.Visible = false;
+            this.txtProxyServer.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtProxyServer.Lines = new string[0];
+            this.txtProxyServer.Location = new System.Drawing.Point(70, 112);
+            this.txtProxyServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProxyServer.MaxLength = 32767;
+            this.txtProxyServer.Name = "txtProxyServer";
+            this.txtProxyServer.PasswordChar = '\0';
+            this.txtProxyServer.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyServer.SelectedText = "";
+            this.txtProxyServer.SelectionLength = 0;
+            this.txtProxyServer.SelectionStart = 0;
+            this.txtProxyServer.ShortcutsEnabled = true;
+            this.txtProxyServer.ShowClearButton = true;
+            this.txtProxyServer.Size = new System.Drawing.Size(416, 30);
+            this.txtProxyServer.TabIndex = 5;
+            this.txtProxyServer.UseSelectable = true;
+            this.txtProxyServer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyServer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // metroStyleManager1
             // 
             this.metroStyleManager1.Owner = this;
-            // 
-            // toolbarUserControl1
-            // 
-            this.toolbarUserControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.toolbarUserControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolbarUserControl1.Location = new System.Drawing.Point(814, 10);
-            this.toolbarUserControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.toolbarUserControl1.MinimzeButton = false;
-            this.toolbarUserControl1.Name = "toolbarUserControl1";
-            this.toolbarUserControl1.Size = new System.Drawing.Size(108, 62);
-            this.toolbarUserControl1.TabIndex = 22;
-            this.toolbarUserControl1.UseSelectable = true;
             // 
             // btnOK
             // 
@@ -278,6 +444,18 @@
             this.btnCancel.UseCustomForeColor = true;
             this.btnCancel.UseSelectable = true;
             // 
+            // toolbarUserControl1
+            // 
+            this.toolbarUserControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolbarUserControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolbarUserControl1.Location = new System.Drawing.Point(814, 10);
+            this.toolbarUserControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.toolbarUserControl1.MinimzeButton = false;
+            this.toolbarUserControl1.Name = "toolbarUserControl1";
+            this.toolbarUserControl1.Size = new System.Drawing.Size(108, 62);
+            this.toolbarUserControl1.TabIndex = 22;
+            this.toolbarUserControl1.UseSelectable = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -303,6 +481,8 @@
             this.tabOthers.PerformLayout();
             this.pnlStyleViewer.ResumeLayout(false);
             this.pnlStyleViewer.PerformLayout();
+            this.tabProxy.ResumeLayout(false);
+            this.tabProxy.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.ResumeLayout(false);
 
@@ -326,5 +506,13 @@
         private System.Windows.Forms.Label lblStyleTitle;
         private MetroFramework.Controls.MetroButton btnOK;
         private MetroFramework.Controls.MetroButton btnCancel;
+        private MetroFramework.Controls.MetroTabPage tabProxy;
+        private MetroFramework.Controls.MetroTextBox txtProxyServer;
+        private MetroFramework.Controls.MetroCheckBox chkUseProxy;
+        private MetroFramework.Controls.MetroLabel lblProxyPassword;
+        private MetroFramework.Controls.MetroLabel lblProxyUsername;
+        private MetroFramework.Controls.MetroLabel lblProxyServer;
+        private MetroFramework.Controls.MetroTextBox txtProxyPassword;
+        private MetroFramework.Controls.MetroTextBox txtProxyUsername;
     }
 }
