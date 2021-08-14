@@ -203,7 +203,7 @@ namespace IMDbAPI_Client.UserControls
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, Program.GetWebProxy());
+                            await Utils.DownloadFileAsync(filePath, p.Link, _apiLib.WebProxy);
                             current++;
                             index++;
                         }
@@ -211,7 +211,7 @@ namespace IMDbAPI_Client.UserControls
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, Program.GetWebProxy());
+                            await Utils.DownloadFileAsync(filePath, p.Link, _apiLib.WebProxy);
                             current++;
                             index++;
                         }
@@ -246,7 +246,7 @@ namespace IMDbAPI_Client.UserControls
                             ReportCurrent("Images", currentIndex, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{Utils.RenameToPhisicalName(img.Title)}.jpg");
                             string url = img.Image;
-                            await Utils.DownloadImageAsync(filePath, url, Program.GetWebProxy());
+                            await Utils.DownloadImageAsync(filePath, url, _apiLib.WebProxy);
                             currentIndex++;
                         }
 
@@ -271,7 +271,7 @@ namespace IMDbAPI_Client.UserControls
                                     video.Url,
                                     new ProgressData(progress => ReportCurrent($"Trailer", progress.Current, progress.Total, cancellationToken.IsCancellationRequested, true)),
                                     cancellationToken,
-                                    Program.GetWebProxy());
+                                    _apiLib.WebProxy);
 
                                 if (trailerBytes != null)
                                 {

@@ -16,25 +16,5 @@ namespace IMDbAPI_Client
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
-
-        public static WebProxy GetWebProxy()
-        {
-            if (!Properties.Settings.Default.UseProxy)
-                return null;
-
-            var webProxy = new WebProxy();
-            webProxy.Address = new Uri(Properties.Settings.Default.ProxyAddress);
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.ProxyUsername)
-                && !string.IsNullOrEmpty(Properties.Settings.Default.ProxyPassword))
-            {
-                webProxy.Credentials = new NetworkCredential(
-                    Properties.Settings.Default.ProxyUsername,
-                    Properties.Settings.Default.ProxyPassword);
-                webProxy.UseDefaultCredentials = false;
-            }
-            webProxy.BypassProxyOnLocal = false;
-
-            return webProxy;
-        }
     }
 }
