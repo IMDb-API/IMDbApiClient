@@ -24,7 +24,13 @@ namespace IMDbAPI_Client.UserControls
             _gridDataItems = gridDataItems;
 
             string apiKey = Properties.Settings.Default.ApiKey;
-            _apiLib = new ApiLib(apiKey, Program.GetWebProxy());
+            if (Properties.Settings.Default.UseProxy)
+                _apiLib = new ApiLib(apiKey,
+                    Properties.Settings.Default.ProxyAddress,
+                    Properties.Settings.Default.ProxyUsername,
+                    Properties.Settings.Default.ProxyPassword);
+            else
+                _apiLib = new ApiLib(apiKey);
 
             _clientOptions = Properties.Settings.Default.ClientOptions;
         }
@@ -421,7 +427,6 @@ namespace IMDbAPI_Client.UserControls
                 }
                 else
                 {
-
                     if (isFileSize)
                     {
                         string postfix = $" / {maximum}";

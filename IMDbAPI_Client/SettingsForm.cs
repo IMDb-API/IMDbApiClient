@@ -14,7 +14,7 @@ namespace IMDbAPI_Client
             InitializeComponent();
             txtRemoveSiteName.Text = Properties.Settings.Default.RemoveSites;
             chkUseProxy.Checked = Properties.Settings.Default.UseProxy;
-            txtProxyServer.Text = Properties.Settings.Default.ProxyServer;
+            txtProxyAddress.Text = Properties.Settings.Default.ProxyAddress;
             txtProxyUsername.Text = Properties.Settings.Default.ProxyUsername;
             txtProxyPassword.Text = Properties.Settings.Default.ProxyPassword;
             chkUseProxy_CheckedChanged(null, null);
@@ -46,7 +46,7 @@ namespace IMDbAPI_Client
             _settingsUC.SaveSettings();
 
             Properties.Settings.Default.RemoveSites = txtRemoveSiteName.Text;
-            Properties.Settings.Default.ProxyServer = txtProxyServer.Text;
+            Properties.Settings.Default.ProxyAddress = txtProxyAddress.Text;
             Properties.Settings.Default.ProxyUsername = txtProxyUsername.Text;
             Properties.Settings.Default.ProxyPassword = txtProxyPassword.Text;
 
@@ -81,8 +81,8 @@ namespace IMDbAPI_Client
 
         private void chkUseProxy_CheckedChanged(object sender, EventArgs e)
         {
-            lblProxyServer.Enabled =
-                txtProxyServer.Enabled =
+            lblProxyAddress.Enabled =
+                txtProxyAddress.Enabled =
                 lblProxyUsername.Enabled =
                 txtProxyUsername.Enabled =
                 lblProxyPassword.Enabled =

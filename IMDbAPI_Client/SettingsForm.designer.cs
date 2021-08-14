@@ -45,11 +45,11 @@
             this.tabProxy = new MetroFramework.Controls.MetroTabPage();
             this.lblProxyPassword = new MetroFramework.Controls.MetroLabel();
             this.lblProxyUsername = new MetroFramework.Controls.MetroLabel();
-            this.lblProxyServer = new MetroFramework.Controls.MetroLabel();
+            this.lblProxyAddress = new MetroFramework.Controls.MetroLabel();
             this.txtProxyPassword = new MetroFramework.Controls.MetroTextBox();
             this.chkUseProxy = new MetroFramework.Controls.MetroCheckBox();
             this.txtProxyUsername = new MetroFramework.Controls.MetroTextBox();
-            this.txtProxyServer = new MetroFramework.Controls.MetroTextBox();
+            this.txtProxyAddress = new MetroFramework.Controls.MetroTextBox();
             this.metroStyleManager1 = new MetroFramework.Components.MetroStyleManager(this.components);
             this.btnOK = new MetroFramework.Controls.MetroButton();
             this.btnCancel = new MetroFramework.Controls.MetroButton();
@@ -246,11 +246,11 @@
             // 
             this.tabProxy.Controls.Add(this.lblProxyPassword);
             this.tabProxy.Controls.Add(this.lblProxyUsername);
-            this.tabProxy.Controls.Add(this.lblProxyServer);
+            this.tabProxy.Controls.Add(this.lblProxyAddress);
             this.tabProxy.Controls.Add(this.txtProxyPassword);
             this.tabProxy.Controls.Add(this.chkUseProxy);
             this.tabProxy.Controls.Add(this.txtProxyUsername);
-            this.tabProxy.Controls.Add(this.txtProxyServer);
+            this.tabProxy.Controls.Add(this.txtProxyAddress);
             this.tabProxy.HorizontalScrollbarBarColor = true;
             this.tabProxy.HorizontalScrollbarHighlightOnWheel = false;
             this.tabProxy.HorizontalScrollbarSize = 8;
@@ -281,14 +281,14 @@
             this.lblProxyUsername.TabIndex = 8;
             this.lblProxyUsername.Text = "Username";
             // 
-            // lblProxyServer
+            // lblProxyAddress
             // 
-            this.lblProxyServer.AutoSize = true;
-            this.lblProxyServer.Location = new System.Drawing.Point(70, 89);
-            this.lblProxyServer.Name = "lblProxyServer";
-            this.lblProxyServer.Size = new System.Drawing.Size(47, 19);
-            this.lblProxyServer.TabIndex = 8;
-            this.lblProxyServer.Text = "Server";
+            this.lblProxyAddress.AutoSize = true;
+            this.lblProxyAddress.Location = new System.Drawing.Point(70, 89);
+            this.lblProxyAddress.Name = "lblProxyAddress";
+            this.lblProxyAddress.Size = new System.Drawing.Size(47, 19);
+            this.lblProxyAddress.TabIndex = 8;
+            this.lblProxyAddress.Text = "Address";
             // 
             // txtProxyPassword
             // 
@@ -375,40 +375,40 @@
             this.txtProxyUsername.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtProxyUsername.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // txtProxyServer
+            // txtProxyAddress
             // 
-            this.txtProxyServer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtProxyAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             // 
             // 
             // 
-            this.txtProxyServer.CustomButton.Image = null;
-            this.txtProxyServer.CustomButton.Location = new System.Drawing.Point(388, 2);
-            this.txtProxyServer.CustomButton.Name = "";
-            this.txtProxyServer.CustomButton.Size = new System.Drawing.Size(25, 25);
-            this.txtProxyServer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
-            this.txtProxyServer.CustomButton.TabIndex = 1;
-            this.txtProxyServer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.txtProxyServer.CustomButton.UseSelectable = true;
-            this.txtProxyServer.CustomButton.Visible = false;
-            this.txtProxyServer.FontSize = MetroFramework.MetroTextBoxSize.Medium;
-            this.txtProxyServer.Lines = new string[0];
-            this.txtProxyServer.Location = new System.Drawing.Point(70, 112);
-            this.txtProxyServer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtProxyServer.MaxLength = 32767;
-            this.txtProxyServer.Name = "txtProxyServer";
-            this.txtProxyServer.PasswordChar = '\0';
-            this.txtProxyServer.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.txtProxyServer.SelectedText = "";
-            this.txtProxyServer.SelectionLength = 0;
-            this.txtProxyServer.SelectionStart = 0;
-            this.txtProxyServer.ShortcutsEnabled = true;
-            this.txtProxyServer.ShowClearButton = true;
-            this.txtProxyServer.Size = new System.Drawing.Size(416, 30);
-            this.txtProxyServer.TabIndex = 5;
-            this.txtProxyServer.UseSelectable = true;
-            this.txtProxyServer.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtProxyServer.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtProxyAddress.CustomButton.Image = null;
+            this.txtProxyAddress.CustomButton.Location = new System.Drawing.Point(388, 2);
+            this.txtProxyAddress.CustomButton.Name = "";
+            this.txtProxyAddress.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.txtProxyAddress.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.txtProxyAddress.CustomButton.TabIndex = 1;
+            this.txtProxyAddress.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.txtProxyAddress.CustomButton.UseSelectable = true;
+            this.txtProxyAddress.CustomButton.Visible = false;
+            this.txtProxyAddress.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.txtProxyAddress.Lines = new string[0];
+            this.txtProxyAddress.Location = new System.Drawing.Point(70, 112);
+            this.txtProxyAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtProxyAddress.MaxLength = 32767;
+            this.txtProxyAddress.Name = "txtProxyAddress";
+            this.txtProxyAddress.PasswordChar = '\0';
+            this.txtProxyAddress.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtProxyAddress.SelectedText = "";
+            this.txtProxyAddress.SelectionLength = 0;
+            this.txtProxyAddress.SelectionStart = 0;
+            this.txtProxyAddress.ShortcutsEnabled = true;
+            this.txtProxyAddress.ShowClearButton = true;
+            this.txtProxyAddress.Size = new System.Drawing.Size(416, 30);
+            this.txtProxyAddress.TabIndex = 5;
+            this.txtProxyAddress.UseSelectable = true;
+            this.txtProxyAddress.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtProxyAddress.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // metroStyleManager1
             // 
@@ -507,11 +507,11 @@
         private MetroFramework.Controls.MetroButton btnOK;
         private MetroFramework.Controls.MetroButton btnCancel;
         private MetroFramework.Controls.MetroTabPage tabProxy;
-        private MetroFramework.Controls.MetroTextBox txtProxyServer;
+        private MetroFramework.Controls.MetroTextBox txtProxyAddress;
         private MetroFramework.Controls.MetroCheckBox chkUseProxy;
         private MetroFramework.Controls.MetroLabel lblProxyPassword;
         private MetroFramework.Controls.MetroLabel lblProxyUsername;
-        private MetroFramework.Controls.MetroLabel lblProxyServer;
+        private MetroFramework.Controls.MetroLabel lblProxyAddress;
         private MetroFramework.Controls.MetroTextBox txtProxyPassword;
         private MetroFramework.Controls.MetroTextBox txtProxyUsername;
     }

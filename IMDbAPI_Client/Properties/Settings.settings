@@ -36,7 +36,7 @@ DownloadSiteName2</Value>
     <Setting Name="UseProxy" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ProxyServer" Type="System.String" Scope="User">
+    <Setting Name="ProxyAddress" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ProxyUsername" Type="System.String" Scope="User">

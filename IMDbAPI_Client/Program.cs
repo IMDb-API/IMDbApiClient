@@ -23,11 +23,15 @@ namespace IMDbAPI_Client
                 return null;
 
             var webProxy = new WebProxy();
-            webProxy.Address = new Uri(Properties.Settings.Default.ProxyServer);
-            webProxy.Credentials = new NetworkCredential(
-                Properties.Settings.Default.ProxyUsername,
-                Properties.Settings.Default.ProxyPassword);
-            webProxy.UseDefaultCredentials = false;
+            webProxy.Address = new Uri(Properties.Settings.Default.ProxyAddress);
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.ProxyUsername)
+                && !string.IsNullOrEmpty(Properties.Settings.Default.ProxyPassword))
+            {
+                webProxy.Credentials = new NetworkCredential(
+                    Properties.Settings.Default.ProxyUsername,
+                    Properties.Settings.Default.ProxyPassword);
+                webProxy.UseDefaultCredentials = false;
+            }
             webProxy.BypassProxyOnLocal = false;
 
             return webProxy;
