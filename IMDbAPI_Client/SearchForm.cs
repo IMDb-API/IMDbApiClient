@@ -164,7 +164,7 @@ namespace IMDbAPI_Client
             item.Image = item.Image.Replace("/original/", "/224x308/");
             using (var wc = new WebClient())
             {
-                picPoster.Image = Utils.BytesToImage(await wc.DownloadDataTaskAsync(item.Image));
+                picPoster.Image = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(item.Image));
             }
             EnableControlls(true);
         }

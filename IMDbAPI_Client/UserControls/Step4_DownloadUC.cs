@@ -203,7 +203,7 @@ namespace IMDbAPI_Client.UserControls
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, _apiLib.WebProxy);
+                            await Utils.DownloadFileAsync(filePath, p.Link, null, _apiLib.WebProxy);
                             current++;
                             index++;
                         }
@@ -211,7 +211,7 @@ namespace IMDbAPI_Client.UserControls
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, _apiLib.WebProxy);
+                            await Utils.DownloadFileAsync(filePath, p.Link, null, _apiLib.WebProxy);
                             current++;
                             index++;
                         }

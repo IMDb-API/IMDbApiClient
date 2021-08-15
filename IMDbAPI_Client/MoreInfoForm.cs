@@ -81,14 +81,16 @@ namespace IMDbAPI_Client
 
             data.Image = data.Image.Replace("/original/", "/224x308/");
             using (var wc = new WebClient())
-                picPoster.Image = Utils.BytesToImage(await wc.DownloadDataTaskAsync(data.Image));
+            {
+                picPoster.Image = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(data.Image));
+            }
 
             foreach (var act in data.ActorList.Take(6))
             {
                 var uc = new CastUserControl();
                 act.Image = act.Image.Replace("/original/", "/96x132/");
                 using (var wc = new WebClient())
-                    uc.CastImage = Utils.BytesToImage(await wc.DownloadDataTaskAsync(act.Image));
+                    uc.CastImage = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(act.Image));
                 uc.CastName = act.Name;
                 uc.CastAsCharacter = act.AsCharacter;
 
