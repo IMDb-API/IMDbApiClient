@@ -9,3 +9,17 @@ Install from Nuget using the command: **Install-Package IMDbApiLib** View more a
 
 ## Screenshot
 ![IMDb API Client](https://imdb-api.com/img/imdb-api-client.png "IMDb API Client")
+
+## IMDb-Api Client Application - Created by Avalonia and .net 5.0
+### Windows x86/x64
+![IMDb API Client Windows](https://imdb-api.com/img/imdb-api-client-windows.png "IMDb API Client Windows")
+
+### OSX x64
+![IMDb API Client OSX](https://imdb-api.com/img/imdb-api-client-osx.png "IMDb API Client OSX")
+
+### Linux x64
+![IMDb API Client Linux](https://imdb-api.com/img/imdb-api-client-linux.png "IMDb API Client Linux")
+
+
+## Download
+[Download latest version](https://github.com/IMDb-API/IMDbApiClient/releases)
