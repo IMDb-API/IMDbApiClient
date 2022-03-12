@@ -109,7 +109,7 @@
             this.txtMoviesDir.MaxLength = 32767;
             this.txtMoviesDir.Name = "txtMoviesDir";
             this.txtMoviesDir.PasswordChar = '\0';
-            this.txtMoviesDir.PromptText = "Movies Directory ex: D:\\...\\New Movies";
+            this.txtMoviesDir.WaterMark = "Movies Directory ex: D:\\...\\New Movies";
             this.txtMoviesDir.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtMoviesDir.SelectedText = "";
             this.txtMoviesDir.SelectionLength = 0;
@@ -218,7 +218,7 @@
             this.txtSeriesTvDir.MaxLength = 32767;
             this.txtSeriesTvDir.Name = "txtSeriesTvDir";
             this.txtSeriesTvDir.PasswordChar = '\0';
-            this.txtSeriesTvDir.PromptText = "Series TV Directory ex: D:\\...\\Series TVs";
+            this.txtSeriesTvDir.WaterMark = "Series TV Directory ex: D:\\...\\Series TVs";
             this.txtSeriesTvDir.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSeriesTvDir.SelectedText = "";
             this.txtSeriesTvDir.SelectionLength = 0;
@@ -312,7 +312,7 @@
             this.txtSeriesTvID.MaxLength = 32767;
             this.txtSeriesTvID.Name = "txtSeriesTvID";
             this.txtSeriesTvID.PasswordChar = '\0';
-            this.txtSeriesTvID.PromptText = "ex: tt0411008";
+            this.txtSeriesTvID.WaterMark = "ex: tt0411008";
             this.txtSeriesTvID.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSeriesTvID.SelectedText = "";
             this.txtSeriesTvID.SelectionLength = 0;
@@ -373,7 +373,7 @@
             this.txtMovieFile.MaxLength = 32767;
             this.txtMovieFile.Name = "txtMovieFile";
             this.txtMovieFile.PasswordChar = '\0';
-            this.txtMovieFile.PromptText = "Movie File ex: D:\\...\\Leon The Professional.mkv";
+            this.txtMovieFile.WaterMark = "Movie File ex: D:\\...\\Leon The Professional.mkv";
             this.txtMovieFile.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtMovieFile.SelectedText = "";
             this.txtMovieFile.SelectionLength = 0;
