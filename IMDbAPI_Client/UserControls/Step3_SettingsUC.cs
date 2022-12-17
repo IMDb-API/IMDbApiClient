@@ -24,10 +24,6 @@ namespace IMDbAPI_Client.UserControls
             ddlPlotLanguage.DataSource = new BindingSource(Utils.Languages, null);
             ddlPlotLanguage.DisplayMember = "Key";
             ddlPlotLanguage.ValueMember = "Value";
-
-            ddlSubtitles_Language.DataSource = new BindingSource(Utils.SubtitleLanguages, null);
-            ddlSubtitles_Language.DisplayMember = "Key";
-            ddlSubtitles_Language.ValueMember = "Value";
             #endregion
 
             Options = Properties.Settings.Default.ClientOptions;
@@ -49,9 +45,6 @@ namespace IMDbAPI_Client.UserControls
                 chkReport_FullCast.Checked = value.Report_FullCast;
                 chkReport_Wikipedia.Checked = value.Report_Wikipedia;
 
-                chkSubtitles.Checked = value.Subtitles;
-                ddlSubtitles_Language.SelectedValue = value.Subtitles_Language.ToString().ToLower();
-
                 chkImages.Checked = value.Images;
                 rbImages_Short.Checked = value.Images_Short;
                 rbImages_Full.Checked = value.Images_Full;
@@ -59,10 +52,10 @@ namespace IMDbAPI_Client.UserControls
                 chkTrailer.Checked = value.Trailer;
 
                 chkExternalSites.Checked = value.ExternalSites;
+                chkResizeImagesAndPosters.Checked = value.ResizeImagesAndPosters;
 
                 chkPosters_CheckedChanged(null, null);
                 chkReport_CheckedChanged(null, null);
-                chkSubtitles_CheckedChanged(null, null);
                 chkImages_CheckedChanged(null, null);
             }
             get
@@ -77,14 +70,12 @@ namespace IMDbAPI_Client.UserControls
                 opt.Report_FullActor = chkReport_FullActor.Checked;
                 opt.Report_FullCast = chkReport_FullCast.Checked;
                 opt.Report_Wikipedia = chkReport_Wikipedia.Checked;
-                opt.Subtitles = chkSubtitles.Checked;
-                opt.Subtitles_Language = (SubtitleLanguage)Enum.Parse(typeof(SubtitleLanguage), ddlSubtitles_Language.SelectedValue.ToString(), true);
                 opt.Images = chkImages.Checked;
                 opt.Images_Short = rbImages_Short.Checked;
                 opt.Images_Full = rbImages_Full.Checked;
                 opt.Trailer = chkTrailer.Checked;
-                opt.ExternalSites = chkExternalSites
-                    .Checked;
+                opt.ExternalSites = chkExternalSites.Checked;
+                opt.ResizeImagesAndPosters = chkResizeImagesAndPosters.Checked;
 
                 return opt;
             }
@@ -95,11 +86,6 @@ namespace IMDbAPI_Client.UserControls
         private void chkReport_CheckedChanged(object sender, EventArgs e)
         {
             grpReport.Enabled = chkReport.Checked;
-        }
-
-        private void chkSubtitles_CheckedChanged(object sender, EventArgs e)
-        {
-            grpSubtitles.Enabled = chkSubtitles.Checked;
         }
 
         private void chkImages_CheckedChanged(object sender, EventArgs e)
@@ -124,9 +110,9 @@ namespace IMDbAPI_Client.UserControls
             Style = metroStyleManager1.Style = Properties.Settings.Default.Style;
 
             if (Theme == MetroThemeStyle.Dark)
-                grpReport.ForeColor = grpPosters.ForeColor = grpSubtitles.ForeColor = grpImages.ForeColor = Color.Silver;
+                grpReport.ForeColor = grpPosters.ForeColor = grpImages.ForeColor = Color.Silver;
             else
-                grpReport.ForeColor = grpPosters.ForeColor = grpSubtitles.ForeColor = grpImages.ForeColor = Color.Black;
+                grpReport.ForeColor = grpPosters.ForeColor = grpImages.ForeColor = Color.Black;
 
             base.OnLoad(e);
         }
@@ -135,7 +121,7 @@ namespace IMDbAPI_Client.UserControls
         {
             get
             {
-                if (!chkReport.Checked && !chkPosters.Checked && !chkSubtitles.Checked && !chkImages.Checked && !chkTrailer.Checked && !chkExternalSites.Checked)
+                if (!chkReport.Checked && !chkPosters.Checked && !chkImages.Checked && !chkTrailer.Checked && !chkExternalSites.Checked)
                     return "Please choose one or more items to download";
 
                 return string.Empty;

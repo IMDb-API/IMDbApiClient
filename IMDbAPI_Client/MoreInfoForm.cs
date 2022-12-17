@@ -78,19 +78,33 @@ namespace IMDbAPI_Client
             lblCompany.Text = data.Companies;
             lblRuntime.Text = data.RuntimeStr;
             lblGenre.Text = string.Join(", ", data.GenreList.Select(cx => cx.Key));
-
-            data.Image = data.Image.Replace("/original/", "/224x308/");
-            using (var wc = new WebClient())
+            if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
             {
-                picPoster.Image = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(data.Image));
+                var imageBytes = await _apiLib.ResizeImageBytesAsync("224x308", data.Image);
+                picPoster.Image = ClientUtils.BytesToImage(imageBytes);
             }
-
+            else
+            {
+                using (var webClient = new WebClient())
+                {
+                    picPoster.Image = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(data.Image));
+                }
+            }
             foreach (var act in data.ActorList.Take(6))
             {
                 var uc = new CastUserControl();
-                act.Image = act.Image.Replace("/original/", "/96x132/");
-                using (var wc = new WebClient())
-                    uc.CastImage = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(act.Image));
+                if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
+                {
+                    var imageBytes = await _apiLib.ResizeImageBytesAsync("96x132", act.Image);
+                    uc.CastImage = ClientUtils.BytesToImage(imageBytes);
+                }
+                else
+                {
+                    using (var webClient = new WebClient())
+                    {
+                        uc.CastImage = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(act.Image));
+                    }
+                }
                 uc.CastName = act.Name;
                 uc.CastAsCharacter = act.AsCharacter;
 

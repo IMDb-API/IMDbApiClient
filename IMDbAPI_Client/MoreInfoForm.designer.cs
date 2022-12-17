@@ -153,6 +153,7 @@
             this.picPoster.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.picPoster.Name = "picPoster";
             this.picPoster.Size = new System.Drawing.Size(224, 308);
+            this.picPoster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPoster.TabIndex = 9;
             this.picPoster.TabStop = false;
             // 

@@ -9,13 +9,11 @@ namespace IMDbAPI_Client
         // Default values
         public ClientOptions()
         {
-            PlotLanguage = Language.fa;
+            PlotLanguage = Language.en;
             Report_Ratings = true;
             Posters = true;
             Posters_EnglishOnly = true;
             Report = true;
-            Subtitles = true;
-            Subtitles_Language = SubtitleLanguage.Fa;
             Images_Short = true;
         }
 
@@ -34,9 +32,6 @@ namespace IMDbAPI_Client
         public bool Posters_EnglishOnly { get; set; }
 
 
-        public bool Subtitles { get; set; }
-        public SubtitleLanguage Subtitles_Language { get; set; }
-
         public bool Images { get; set; }
         public bool Images_Short { get; set; }
         public bool Images_Full { get; set; }
@@ -45,6 +40,8 @@ namespace IMDbAPI_Client
         public bool Trailer { get; set; }
 
         public bool ExternalSites { get; set; }
+
+        public bool ResizeImagesAndPosters { get; set; }
 
         public override string ToString()
         {

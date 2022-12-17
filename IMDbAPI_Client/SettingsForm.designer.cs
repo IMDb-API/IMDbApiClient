@@ -162,7 +162,7 @@
             this.tabOthers.Name = "tabOthers";
             this.tabOthers.Size = new System.Drawing.Size(870, 465);
             this.tabOthers.TabIndex = 2;
-            this.tabOthers.Text = "Others";
+            this.tabOthers.Text = "Theme";
             this.tabOthers.VerticalScrollbarBarColor = true;
             this.tabOthers.VerticalScrollbarHighlightOnWheel = false;
             this.tabOthers.VerticalScrollbarSize = 3;

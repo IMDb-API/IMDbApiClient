@@ -25,12 +25,16 @@ namespace IMDbAPI_Client
 
             string apiKey = Properties.Settings.Default.ApiKey;
             if (Properties.Settings.Default.UseProxy)
+            {
                 _apiLib = new ApiLib(apiKey,
                     Properties.Settings.Default.ProxyAddress,
                     Properties.Settings.Default.ProxyUsername,
                     Properties.Settings.Default.ProxyPassword);
+            }
             else
+            {
                 _apiLib = new ApiLib(apiKey);
+            }
         }
 
         private readonly ApiLib _apiLib;
@@ -40,9 +44,13 @@ namespace IMDbAPI_Client
             get
             {
                 var rs = new List<MovieResult>();
-                if (_searchData != null && _searchData.Results != null)
+                if (_searchData != null && _searchData.Results != null && _searchData.Results.Count > 0)
+                {
                     foreach (var r in _searchData.Results)
+                    {
                         rs.Add(new MovieResult(r.Id, $"{r.Title} {r.Description}"));
+                    }
+                }
                 return rs;
             }
         }
@@ -113,6 +121,10 @@ namespace IMDbAPI_Client
             lbResults.DisplayMember = "Title";
             lbResults.ValueMember = "Id";
             lbResults.DataSource = _results;
+            if (_results != null && _results.Count > 0)
+            {
+                lbResults.SelectedIndex = 0;
+            }
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -161,10 +173,17 @@ namespace IMDbAPI_Client
 
             EnableControlls(false);
             picPoster.Image = null;
-            item.Image = item.Image.Replace("/original/", "/224x308/");
-            using (var wc = new WebClient())
+            if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
             {
-                picPoster.Image = ClientUtils.BytesToImage(await wc.DownloadDataTaskAsync(item.Image));
+                var imageBytes = await _apiLib.ResizeImageBytesAsync("224x308", item.Image);
+                picPoster.Image = ClientUtils.BytesToImage(imageBytes);
+            }
+            else
+            {
+                using (var webClient = new WebClient())
+                {
+                    picPoster.Image = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(item.Image));
+                }
             }
             EnableControlls(true);
         }

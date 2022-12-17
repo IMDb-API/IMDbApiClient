@@ -112,7 +112,7 @@ namespace IMDbAPI_Client.UserControls
                     return;
                 }
 
-                if (data.Results.Count == 1)
+                if (data.Results != null && data.Results.Count == 1)
                 {
                     var result = data.Results.First();
                     var titleData = await _apiLib.TitleAsync(result.Id);

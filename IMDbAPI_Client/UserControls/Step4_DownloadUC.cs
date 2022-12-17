@@ -24,13 +24,17 @@ namespace IMDbAPI_Client.UserControls
             _gridDataItems = gridDataItems;
 
             string apiKey = Properties.Settings.Default.ApiKey;
-            if (Properties.Settings.Default.UseProxy)
+            if (Properties.Settings.Default.UseProxy && !Properties.Settings.Default.ProxyAddress.IsNull())
+            {
                 _apiLib = new ApiLib(apiKey,
                     Properties.Settings.Default.ProxyAddress,
                     Properties.Settings.Default.ProxyUsername,
                     Properties.Settings.Default.ProxyPassword);
+            }
             else
+            {
                 _apiLib = new ApiLib(apiKey);
+            }
 
             _clientOptions = Properties.Settings.Default.ClientOptions;
         }
@@ -38,7 +42,7 @@ namespace IMDbAPI_Client.UserControls
         private readonly ApiLib _apiLib;
         private readonly ClientOptions _clientOptions;
 
-        public string Title => "Step IV: Downloading...";
+        public string Title { set; get; } = "Step IV: Downloading...";
 
         private readonly List<GridData> _gridDataItems;
 
@@ -131,33 +135,6 @@ namespace IMDbAPI_Client.UserControls
 
                     }
                     ReportCurrent("...", 1, 1, cancellationToken.IsCancellationRequested);
-
-                    // SUBTITLE
-                    if (_clientOptions.Subtitles)
-                    {
-                        int? seasonNumber = null;
-                        if (Properties.Settings.Default.OperationType == OperationType.TVSeries
-                            && data.TvSeriesInfo != null
-                            && data.TvSeriesInfo.Seasons != null
-                            && data.TvSeriesInfo.Seasons.Count > 1)
-                        {
-                            var snForm = new SelectSeasonForm(data.FullTitle, data.TvSeriesInfo.Seasons);
-                            if (snForm.ShowDialog() == DialogResult.OK)
-                                seasonNumber = snForm.SeasonNumber;
-                        }
-
-                        ReportCurrent("Subtitles", 1, 1, cancellationToken.IsCancellationRequested);
-
-                        var subtitleData = await _apiLib.SubtitleDataAsync(data.Id, _clientOptions.Subtitles_Language, seasonNumber);
-
-                        await _apiLib.DownloadSubtitleAsync(
-                            movieRootDir,
-                            subtitleData,
-                            new ProgressData(progress => ReportCurrent("Subtitles", progress.Current, progress.Total, cancellationToken.IsCancellationRequested)),
-                            cancellationToken);
-
-                        ReportCurrent("...", 1, 1, cancellationToken.IsCancellationRequested);
-                    }
 
                     // REPORTS
                     if (_clientOptions.Report)
@@ -298,15 +275,6 @@ namespace IMDbAPI_Client.UserControls
                         if (!Directory.Exists(dir))
                             Directory.CreateDirectory(dir);
 
-                        // IMDb-API
-                        {
-                            string filePath = Path.Combine(dir, $"{item.Id} on IMDb-API.url");
-                            string content = $"[InternetShortcut]";
-                            content += Environment.NewLine;
-                            content += $"URL=https://imdb-api.com/title/{item.Id}";
-                            File.WriteAllText(filePath, content);
-                        }
-
                         // IMDb
                         {
                             string filePath = Path.Combine(dir, $"{item.Id} on IMDb.url");
@@ -337,9 +305,6 @@ namespace IMDbAPI_Client.UserControls
                             // TheTVDB
                             Utils.CreateUrlShortcut(dir, $"{item.Id} on TheTVDB.url", externalSiteData.TheTVDB?.Url);
 
-                            // TV_com
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on TV_com.url", externalSiteData.TV_com?.Url);
-
                             // FilmAffinity
                             Utils.CreateUrlShortcut(dir, $"{item.Id} on FilmAffinity.url", externalSiteData.FilmAffinity?.Url);
 
@@ -358,15 +323,15 @@ namespace IMDbAPI_Client.UserControls
                         }
 
                         // ACTORS
-                        string actorDir = Path.Combine(dir, "Actors");
-                        if (!Directory.Exists(actorDir))
-                            Directory.CreateDirectory(actorDir);
+                        string actDir = Path.Combine(dir, "Actors and Actresses");
+                        if (!Directory.Exists(actDir))
+                            Directory.CreateDirectory(actDir);
                         foreach (var actor in data.ActorList)
                         {
-                            string filePath = Path.Combine(actorDir, $"{Utils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
+                            string filePath = Path.Combine(actDir, $"{Utils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
                             string content = $"[InternetShortcut]";
                             content += Environment.NewLine;
-                            content += $"URL=https://imdb-api.com/name/{actor.Id}";
+                            content += $"URL=https://www.imdb.com/name/{actor.Id}";
                             File.WriteAllText(filePath, content);
                         }
                     }
@@ -381,6 +346,7 @@ namespace IMDbAPI_Client.UserControls
                 btnCancel.Visible = false;
                 lblTotalProgress.Text = lblCurrent.Text = "done";
                 progressTotal.Value = progressCurrentJob.Value = 100;
+                Title = "Step IV: Download completed";
                 OnCanceled?.Invoke();
 
                 if (ddlWhenDone.Text == "Shutdown [On Successfull]" || ddlWhenDone.Text == "Shutdown [Anyway]")
