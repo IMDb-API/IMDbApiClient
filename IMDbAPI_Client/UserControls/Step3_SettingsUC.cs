@@ -10,7 +10,7 @@ namespace IMDbAPI_Client.UserControls
 {
     public partial class Step3_SettingsUC : MetroUserControl
     {
-        public Step3_SettingsUC()
+        public Step3_SettingsUC(bool visibleResizeImageOption = false)
         {
             InitializeComponent();
 
@@ -21,12 +21,13 @@ namespace IMDbAPI_Client.UserControls
             }
 
             #region Languages
-            ddlPlotLanguage.DataSource = new BindingSource(Utils.Languages, null);
+            ddlPlotLanguage.DataSource = new BindingSource(ApiUtils.Languages, null);
             ddlPlotLanguage.DisplayMember = "Key";
             ddlPlotLanguage.ValueMember = "Value";
             #endregion
 
             Options = Properties.Settings.Default.ClientOptions;
+            chkResizeImagesAndPosters.Visible = visibleResizeImageOption;
         }
 
         public ClientOptions Options

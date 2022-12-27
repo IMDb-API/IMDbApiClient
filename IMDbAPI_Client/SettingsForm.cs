@@ -24,7 +24,7 @@ namespace IMDbAPI_Client
             ddlStyle.DataSource = Enum.GetValues(typeof(MetroColorStyle));
             ddlStyle.SelectedItem = Properties.Settings.Default.Style;
 
-            _settingsUC = new Step3_SettingsUC();
+            _settingsUC = new Step3_SettingsUC(true);
             _settingsUC.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             tabOptions.Controls.Add(_settingsUC);
         }

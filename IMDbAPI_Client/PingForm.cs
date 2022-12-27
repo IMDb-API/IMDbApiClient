@@ -49,7 +49,7 @@ namespace IMDbAPI_Client
             flowLayoutPanel1.Controls.Clear();
             foreach (string server in servers)
             {
-                bool passed = await Utils.PingAsync(server);
+                bool passed = await ApiUtils.PingAsync(server);
 
                 if (passed) passedCount++;
 

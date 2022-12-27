@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace IMDbAPI_Client
@@ -147,7 +148,7 @@ namespace IMDbAPI_Client
                 return;
             }
 
-            System.Diagnostics.Process.Start("https://imdb-api.com/title/" + Id);
+            System.Diagnostics.Process.Start($"https://www.imdb.com/title/{Id}");
         }
 
         private void txtExpression_Enter(object sender, EventArgs e)
@@ -175,15 +176,13 @@ namespace IMDbAPI_Client
             picPoster.Image = null;
             if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
             {
-                var imageBytes = await _apiLib.ResizeImageBytesAsync("224x308", item.Image);
+                var imageBytes = await _apiLib.ResizeImageAsync("224x308", item.Image);
                 picPoster.Image = ClientUtils.BytesToImage(imageBytes);
             }
             else
             {
-                using (var webClient = new WebClient())
-                {
-                    picPoster.Image = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(item.Image));
-                }
+                var imageBytes = await ApiUtils.GetBytesAsync(item.Image);
+                picPoster.Image = ClientUtils.BytesToImage(imageBytes);
             }
             EnableControlls(true);
         }

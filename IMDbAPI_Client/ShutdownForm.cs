@@ -41,7 +41,7 @@ namespace IMDbAPI_Client
                 progress.Value = 0;
                 lblShutdownTitle.Text = $"Shutting down...";
                 timer1.Enabled = false;
-                Utils.Shutdown();
+                ApiUtils.Shutdown();
             }
         }
 

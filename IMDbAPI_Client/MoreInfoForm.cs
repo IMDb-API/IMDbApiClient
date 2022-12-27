@@ -80,30 +80,26 @@ namespace IMDbAPI_Client
             lblGenre.Text = string.Join(", ", data.GenreList.Select(cx => cx.Key));
             if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
             {
-                var imageBytes = await _apiLib.ResizeImageBytesAsync("224x308", data.Image);
+                var imageBytes = await _apiLib.ResizeImageAsync("224x308", data.Image);
                 picPoster.Image = ClientUtils.BytesToImage(imageBytes);
             }
             else
             {
-                using (var webClient = new WebClient())
-                {
-                    picPoster.Image = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(data.Image));
-                }
+                var imageBytes = await ApiUtils.GetBytesAsync(data.Image);
+                picPoster.Image = ClientUtils.BytesToImage(imageBytes);
             }
             foreach (var act in data.ActorList.Take(6))
             {
                 var uc = new CastUserControl();
                 if (Properties.Settings.Default.ClientOptions.ResizeImagesAndPosters)
                 {
-                    var imageBytes = await _apiLib.ResizeImageBytesAsync("96x132", act.Image);
+                    var imageBytes = await _apiLib.ResizeImageAsync("96x132", act.Image);
                     uc.CastImage = ClientUtils.BytesToImage(imageBytes);
                 }
                 else
                 {
-                    using (var webClient = new WebClient())
-                    {
-                        uc.CastImage = ClientUtils.BytesToImage(await webClient.DownloadDataTaskAsync(act.Image));
-                    }
+                    var imageBytes = await ApiUtils.GetBytesAsync(act.Image);
+                    uc.CastImage = ClientUtils.BytesToImage(imageBytes);
                 }
                 uc.CastName = act.Name;
                 uc.CastAsCharacter = act.AsCharacter;
@@ -121,7 +117,7 @@ namespace IMDbAPI_Client
 
         private void btnIMDb_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://imdb-api.com/title/" + _id);
+            System.Diagnostics.Process.Start($"https://www.imdb.com/title/{_id}");
         }
     }
 }

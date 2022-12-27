@@ -20,12 +20,16 @@ namespace IMDbAPI_Client.UserControls
 
             string apiKey = Properties.Settings.Default.ApiKey;
             if (Properties.Settings.Default.UseProxy)
+            {
                 _apiLib = new ApiLib(apiKey,
                     Properties.Settings.Default.ProxyAddress,
                     Properties.Settings.Default.ProxyUsername,
                     Properties.Settings.Default.ProxyPassword);
+            }
             else
+            {
                 _apiLib = new ApiLib(apiKey);
+            }
         }
 
         private readonly ApiLib _apiLib;
@@ -76,7 +80,7 @@ namespace IMDbAPI_Client.UserControls
                 {
                     // Create Folder
                     string nameOnly = fi.Name.Replace(fi.Extension, "");
-                    nameOnly = Utils.RemoveDlSiteName(nameOnly, Properties.Settings.Default.RemoveSites);
+                    nameOnly = ApiUtils.RemoveDlSiteName(nameOnly, Properties.Settings.Default.RemoveSites);
                     string newFolder = $"{dir}\\{nameOnly}";
                     Directory.CreateDirectory(newFolder);
 
@@ -92,7 +96,7 @@ namespace IMDbAPI_Client.UserControls
                 var fi = new FileInfo(file);
                 // Create Folder
                 string nameOnly = fi.Name.Replace(fi.Extension, "");
-                nameOnly = Utils.RemoveDlSiteName(nameOnly, Properties.Settings.Default.RemoveSites);
+                nameOnly = ApiUtils.RemoveDlSiteName(nameOnly, Properties.Settings.Default.RemoveSites);
                 string newFolder = $"{fi.Directory.FullName}\\{nameOnly}";
                 Directory.CreateDirectory(newFolder);
 

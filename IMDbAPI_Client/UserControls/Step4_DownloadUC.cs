@@ -125,7 +125,7 @@ namespace IMDbAPI_Client.UserControls
 
                     // RENAME
                     string srcDir = Path.Combine(workingDir, item.Folder);
-                    string movieRootDir = Path.Combine(workingDir, Utils.RenameToPhisicalName(data.FullTitle));
+                    string movieRootDir = Path.Combine(workingDir, ApiUtils.RenameToPhisicalName(data.FullTitle));
                     if (srcDir != movieRootDir)
                     {
                         if (!Directory.Exists(movieRootDir))
@@ -141,11 +141,10 @@ namespace IMDbAPI_Client.UserControls
                     {
                         ReportCurrent("Report", 1, 1, cancellationToken.IsCancellationRequested);
                         string filePath = Path.Combine(movieRootDir, $"{item.Id}.png");
-                        await _apiLib.DownloadReportAsync(
-                            item.Id,
+                        string reportUrl = _apiLib.ReportUrl(item.Id, _clientOptions.PlotLanguage, _clientOptions.ReportOptionsString);
+                        await ApiUtils.SaveFileAsync(
+                            reportUrl,
                             filePath,
-                            _clientOptions.PlotLanguage,
-                            _clientOptions.ReportOptionsString,
                             new ProgressData(progress => ReportCurrent("Report", progress.Current, progress.Total, cancellationToken.IsCancellationRequested, true)),
                             cancellationToken
                             );
@@ -169,18 +168,11 @@ namespace IMDbAPI_Client.UserControls
 
                         ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
 
-                        // if themoviedb.org is filter in your country! (work, but slow)
-                        if (!await Utils.PingAsync("themoviedb.org"))
-                        {
-                            data.Posters.Posters.ForEach(p => p.Link = p.Link.Replace("/posters/", "/posters-stream/").Replace("/posters/", "/posters-stream/"));
-                            data.Posters.Backdrops.ForEach(p => p.Link = p.Link.Replace("/posters/", "/posters-stream/").Replace("/posters/", "/posters-stream/"));
-                        }
-
                         foreach (var p in data.Posters.Posters)
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, null, _apiLib.WebProxy);
+                            await ApiUtils.SaveFileAsync(p.Link, filePath, _apiLib.WebProxy);
                             current++;
                             index++;
                         }
@@ -188,7 +180,7 @@ namespace IMDbAPI_Client.UserControls
                         {
                             ReportCurrent("Posters", current, total, cancellationToken.IsCancellationRequested);
                             string filePath = Path.Combine(dir, $"{item.Id}-{index.ToString("000")}.jpg");
-                            await Utils.DownloadFileAsync(filePath, p.Link, null, _apiLib.WebProxy);
+                            await ApiUtils.SaveFileAsync(p.Link, filePath, _apiLib.WebProxy);
                             current++;
                             index++;
                         }
@@ -221,13 +213,13 @@ namespace IMDbAPI_Client.UserControls
                         foreach (var img in images)
                         {
                             ReportCurrent("Images", currentIndex, total, cancellationToken.IsCancellationRequested);
-                            string filePath = Path.Combine(dir, $"{Utils.RenameToPhisicalName(img.Title)}.jpg");
+                            string filePath = Path.Combine(dir, $"{ApiUtils.RenameToPhisicalName(img.Title)}.jpg");
                             string url = img.Image;
-                            await Utils.DownloadImageAsync(filePath, url, _apiLib.WebProxy);
+                            await ApiUtils.SaveFileAsync(url, filePath, _apiLib.WebProxy);
                             currentIndex++;
                         }
 
-                        Utils.RemoveDuplicatedFiles(dir);
+                        ApiUtils.RemoveDuplicatedFiles(dir);
                         ReportCurrent("...", 1, 1, cancellationToken.IsCancellationRequested);
                     }
 
@@ -239,28 +231,11 @@ namespace IMDbAPI_Client.UserControls
                         var youtubeTrailerData = await _apiLib.YouTubeTrailerAsync(item.Id);
                         if (string.IsNullOrEmpty(youtubeTrailerData.ErrorMessage))
                         {
-                            var youtubeData = await _apiLib.YouTubeAsync(youtubeTrailerData.VideoId);
+                            string dir = movieRootDir;
+                            if (!Directory.Exists(dir))
+                                Directory.CreateDirectory(dir);
 
-                            if (string.IsNullOrEmpty(youtubeData.ErrorMessage))
-                            {
-                                var video = youtubeData.Videos.FirstOrDefault();
-                                var trailerBytes = await Utils.DownloadDataAsync(
-                                    video.Url,
-                                    new ProgressData(progress => ReportCurrent($"Trailer", progress.Current, progress.Total, cancellationToken.IsCancellationRequested, true)),
-                                    cancellationToken,
-                                    _apiLib.WebProxy);
-
-                                if (trailerBytes != null)
-                                {
-                                    string dir = Path.Combine(movieRootDir, "Trailer");
-                                    if (!Directory.Exists(dir))
-                                        Directory.CreateDirectory(dir);
-
-                                    string filePath = Path.Combine(dir, $"{Utils.RenameToPhisicalName(youtubeData.Title).Trim()} - {video.Quality}.{video.Extension}");
-
-                                    await Task.Run(() => File.WriteAllBytes(filePath, trailerBytes));
-                                }
-                            }
+                            ApiUtils.CreateUrlShortcut(movieRootDir, $"YouTube Trailer.url", youtubeTrailerData.VideoUrl);
                         }
 
                         ReportCurrent("...", 1, 1, cancellationToken.IsCancellationRequested);
@@ -288,36 +263,36 @@ namespace IMDbAPI_Client.UserControls
                         if (string.IsNullOrEmpty(externalSiteData.ErrorMessage))
                         {
                             // TheMovieDb
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on TheMovieDb.url", externalSiteData.TheMovieDb?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on TheMovieDb.url", externalSiteData.TheMovieDb?.Url);
 
                             // RottenTomatoes
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on RottenTomatoes.url", externalSiteData.RottenTomatoes?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on RottenTomatoes.url", externalSiteData.RottenTomatoes?.Url);
 
                             // Metacritic
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on Metacritic.url", externalSiteData.Metacritic?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on Metacritic.url", externalSiteData.Metacritic?.Url);
 
                             // Netflix
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on Netflix.url", externalSiteData.Netflix?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on Netflix.url", externalSiteData.Netflix?.Url);
 
                             // BoxOfficeMojo
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on BoxOfficeMojo.url", externalSiteData.BoxOfficeMojo?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on BoxOfficeMojo.url", externalSiteData.BoxOfficeMojo?.Url);
 
                             // TheTVDB
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on TheTVDB.url", externalSiteData.TheTVDB?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on TheTVDB.url", externalSiteData.TheTVDB?.Url);
 
                             // FilmAffinity
-                            Utils.CreateUrlShortcut(dir, $"{item.Id} on FilmAffinity.url", externalSiteData.FilmAffinity?.Url);
+                            ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on FilmAffinity.url", externalSiteData.FilmAffinity?.Url);
 
                             // Wikipedia (en)
                             if (externalSiteData.WikipediaUrls != null)
                             {
                                 var enWiki = externalSiteData.WikipediaUrls.FirstOrDefault(wx => wx.Language == "en");
-                                Utils.CreateUrlShortcut(dir, $"{item.Id} on Wikipedia [en].url", enWiki?.Url);
+                                ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on Wikipedia [en].url", enWiki?.Url);
 
                                 if (_clientOptions.PlotLanguage != Language.en)
                                 {
                                     var plotLangWiki = externalSiteData.WikipediaUrls.FirstOrDefault(wx => wx.Language == _clientOptions.PlotLanguage.ToString().ToLower());
-                                    Utils.CreateUrlShortcut(dir, $"{item.Id} on Wikipedia [{_clientOptions.PlotLanguage.ToString().ToLower()}].url", plotLangWiki?.Url);
+                                    ApiUtils.CreateUrlShortcut(dir, $"{item.Id} on Wikipedia [{_clientOptions.PlotLanguage.ToString().ToLower()}].url", plotLangWiki?.Url);
                                 }
                             }
                         }
@@ -328,7 +303,7 @@ namespace IMDbAPI_Client.UserControls
                             Directory.CreateDirectory(actDir);
                         foreach (var actor in data.ActorList)
                         {
-                            string filePath = Path.Combine(actDir, $"{Utils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
+                            string filePath = Path.Combine(actDir, $"{ApiUtils.RenameToPhisicalName(actor.Name)} [{actor.Id}].url");
                             string content = $"[InternetShortcut]";
                             content += Environment.NewLine;
                             content += $"URL=https://www.imdb.com/name/{actor.Id}";
@@ -376,7 +351,7 @@ namespace IMDbAPI_Client.UserControls
                 throw new TaskCanceledException("Operation canceled by user.");
 
             lblTotalProgress.Text = $"{title} ({current} / {maximum})";
-            progressTotal.Value = Utils.Percentage(current - 1, maximum);
+            progressTotal.Value = ApiUtils.Percentage(current - 1, maximum);
         }
 
         private void ReportCurrent(string title, long current, long maximum, bool IsCancellationRequested, bool isFileSize = false)
@@ -419,7 +394,7 @@ namespace IMDbAPI_Client.UserControls
                     if (maximum == -1 || maximum == 0)
                         progressCurrentJob.Value = 0;
                     else
-                        progressCurrentJob.Value = Utils.Percentage(current - 1, maximum);
+                        progressCurrentJob.Value = ApiUtils.Percentage(current - 1, maximum);
                 }
             }
             catch (TaskCanceledException ex)

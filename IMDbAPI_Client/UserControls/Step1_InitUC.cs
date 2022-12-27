@@ -24,12 +24,22 @@ namespace IMDbAPI_Client.UserControls
 
             string apiKey = Properties.Settings.Default.ApiKey;
             if (Properties.Settings.Default.UseProxy)
+            {
                 _apiLib = new ApiLib(apiKey,
                     Properties.Settings.Default.ProxyAddress,
                     Properties.Settings.Default.ProxyUsername,
                     Properties.Settings.Default.ProxyPassword);
+            }
             else
+            {
                 _apiLib = new ApiLib(apiKey);
+            }
+
+            if (Properties.Settings.Default.ClientOptions is null)
+            {
+                Properties.Settings.Default.ClientOptions = new ClientOptions();
+                Properties.Settings.Default.Save();
+            }
         }
 
         private readonly ApiLib _apiLib;

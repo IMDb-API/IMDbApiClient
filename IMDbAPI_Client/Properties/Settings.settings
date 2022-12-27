@@ -27,9 +27,6 @@ DownloadSiteName2</Value>
     <Setting Name="MovieFile" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ClientOptions" Type="IMDbAPI_Client.ClientOptions" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="OperationType" Type="IMDbAPI_Client.OperationType" Scope="User">
       <Value Profile="(Default)">Movies</Value>
     </Setting>
@@ -43,6 +40,9 @@ DownloadSiteName2</Value>
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ProxyPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ClientOptions" Type="IMDbAPI_Client.ClientOptions" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>
