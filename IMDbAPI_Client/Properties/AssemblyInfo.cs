@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("IMDbAPI Client")]
 [assembly: AssemblyDescription("Manage and organize movies and series")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("IMDb-API")]
+[assembly: AssemblyCompany("TV-API")]
 [assembly: AssemblyProduct("IMDbAPI Client")]
-[assembly: AssemblyCopyright("Copyright © 2022")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2024")]
+[assembly: AssemblyTrademark("https://tv-api.com")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.9.2.0")]
-[assembly: AssemblyFileVersion("1.9.2.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]

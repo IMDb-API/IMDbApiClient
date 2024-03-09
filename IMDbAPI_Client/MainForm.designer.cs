@@ -174,7 +174,7 @@
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(184, 15);
             this.metroLabel1.TabIndex = 3;
-            this.metroLabel1.Text = "A free client app for IMDb-API.com";
+            this.metroLabel1.Text = "A free client app for TV-API.com";
             // 
             // btnVersion
             // 
@@ -218,7 +218,7 @@
             this.MinimumSize = new System.Drawing.Size(916, 617);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(23, 79, 23, 27);
-            this.Text = "IMDb API Client";
+            this.Text = "TV-API Client";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.pnlCommands.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
