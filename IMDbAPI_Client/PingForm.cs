@@ -31,7 +31,7 @@ namespace IMDbAPI_Client
 
             var servers = new List<string>()
             {
-                "imdb-api.com",
+                "tv-api.com",
                 "imdb.com",
                 "wikipedia.org",
                 "themoviedb.org",

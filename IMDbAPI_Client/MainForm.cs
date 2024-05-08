@@ -18,7 +18,7 @@ namespace IMDbAPI_Client
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             var fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             var version = new Version(fileVersionInfo.ProductVersion);
-            _version = btnVersion.Text = $"v{version.ToString(2)}";
+            _version = btnVersion.Text = $"v{version.ToString(3)}";
         }
 
 
@@ -252,7 +252,7 @@ namespace IMDbAPI_Client
 
         private void btnVersion_Click(object sender, EventArgs e)
         {
-            string url = "https://imdb-api.com/client";
+            string url = "https://tv-api.com/client";
             var ps = new ProcessStartInfo(url)
             {
                 UseShellExecute = true,
